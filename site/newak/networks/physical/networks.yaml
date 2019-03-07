@@ -1,0 +1,214 @@
+---
+##############################################################################
+# Copyright (c) 2018 AT&T Intellectual Property. All rights reserved.        #
+#                                                                            #
+# Licensed under the Apache License, Version 2.0 (the "License"); you may    #
+# not use this file except in compliance with the License.                   #
+#                                                                            #
+# You may obtain a copy of the License at                                    #
+#       http://www.apache.org/licenses/LICENSE-2.0                           #
+#                                                                            #
+# Unless required by applicable law or agreed to in writing, software        #
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT  #
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.           #
+# See the License for the specific language governing permissions and        #
+# limitations under the License.                                             #
+##############################################################################
+
+schema: 'drydock/NetworkLink/v1'
+metadata:
+  schema: 'metadata/Document/v1'
+  name: oob
+  layeringDefinition:
+    abstract: false
+    layer: site
+  storagePolicy: cleartext
+data:
+  labels:
+    noconfig: enabled
+  bonding:
+    mode: disabled
+  mtu: 9000
+  linkspeed: auto
+  trunking:
+    mode: disabled
+    default_network: oob
+  allowed_networks:
+    - oob
+...
+---
+schema: 'drydock/Network/v1'
+metadata:
+  schema: 'metadata/Document/v1'
+  name: oob
+  layeringDefinition:
+    abstract: false
+    layer: site
+  storagePolicy: cleartext
+data:
+  cidr: 192.168.240.0/24
+  routes:
+  - subnet: '0.0.0.0/0'
+    gateway: 192.168.240.1
+  ranges:
+  - type: static
+    start: 192.168.240.100
+    end: 192.168.240.111
+...
+---
+schema: 'drydock/NetworkLink/v1'
+metadata:
+  schema: 'metadata/Document/v1'
+  name: pxe
+  layeringDefinition:
+    abstract: false
+    layer: site
+  storagePolicy: cleartext
+data:
+  bonding:
+    mode: disabled
+  mtu: 9000
+  linkspeed: auto
+  trunking:
+    mode: disabled
+    default_network: pxe
+  allowed_networks:
+    - pxe
+...
+---
+schema: 'drydock/Network/v1'
+metadata:
+  schema: 'metadata/Document/v1'
+  name: pxe
+  layeringDefinition:
+    abstract: false
+    layer: site
+  storagePolicy: cleartext
+data:
+  cidr: 172.30.14.0/24
+  routes:
+  - subnet: '0.0.0.0/0'
+    gateway: 172.30.14.105
+  ranges:
+  - type: reserved
+    start: 172.30.14.2
+    end: 172.30.14.10
+  - type: static
+    start: 172.30.14.100
+    end: 172.30.14.111
+  - type: dhcp
+    start: 172.30.14.200
+    end: 172.30.14.211
+  dns:
+    domain: newak.lab.akraino.org
+    servers: '172.28.9.74 172.28.9.75 8.8.8.8'
+...
+---
+schema: 'drydock/NetworkLink/v1'
+metadata:
+  schema: 'metadata/Document/v1'
+  name: bond0
+  layeringDefinition:
+    abstract: false
+    layer: site
+  storagePolicy: cleartext
+data:
+  bonding:
+    mode: 802.3ad
+    hash: layer3+4
+    peer_rate: fast
+    mon_rate: 100
+    up_delay: 1000
+    down_delay: 3000
+  mtu: 9000
+  linkspeed: auto
+  trunking:
+    mode: 802.1q
+  allowed_networks:
+    - oam
+    - storage
+    - overlay
+    - calico
+...
+---
+schema: 'drydock/Network/v1'
+metadata:
+  schema: 'metadata/Document/v1'
+  name: oam
+  layeringDefinition:
+    abstract: false
+    layer: site
+  storagePolicy: cleartext
+data:
+  vlan: '41'
+  mtu: 9000
+  cidr: 172.28.14.0/24
+  routes:
+  - subnet: '0.0.0.0/0'
+    gateway: 172.28.14.1
+  ranges:
+  - type: reserved
+    start: 172.28.14.2
+    end: 172.28.14.10
+  - type: static
+    start: 172.28.14.100
+    end: 172.28.14.111
+  dns:
+    domain: newak.lab.akraino.org
+    servers: '172.28.9.74 172.28.9.75 8.8.8.8'
+...
+---
+schema: 'drydock/Network/v1'
+metadata:
+  schema: 'metadata/Document/v1'
+  name: storage
+  layeringDefinition:
+    abstract: false
+    layer: site
+  storagePolicy: cleartext
+data:
+  vlan: '42'
+  mtu: 9000
+  cidr: 172.31.14.0/24
+  ranges:
+  - type: static
+    start: 172.31.14.100
+    end: 172.31.14.111
+...
+---
+schema: 'drydock/Network/v1'
+metadata:
+  schema: 'metadata/Document/v1'
+  name: overlay
+  layeringDefinition:
+    abstract: false
+    layer: site
+  storagePolicy: cleartext
+data:
+  vlan: '45'
+  mtu: 9000
+  cidr: 172.27.14.0/24
+  ranges:
+  - type: static
+    start: 172.27.14.100
+    end: 172.27.14.111
+...
+---
+schema: 'drydock/Network/v1'
+metadata:
+  schema: 'metadata/Document/v1'
+  name: calico
+  layeringDefinition:
+    abstract: false
+    layer: site
+  storagePolicy: cleartext
+data:
+  vlan: '44'
+  mtu: 9000
+  cidr: 172.29.14.0/24
+  ranges:
+  - type: static
+    start: 172.29.14.100
+    end: 172.29.14.111
+...
+
