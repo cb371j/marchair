@@ -27,6 +27,8 @@ data:
         - openvswitch
         - sriov
       interface:
+        #tunnel: docker0
+        #tunnel_device: 'bond0.45'
         sriov:
           - device: enp135s0f0
             num_vfs: 32
@@ -35,10 +37,18 @@ data:
             num_vfs: 32
             promisc: false
     conf:
+      dhcp_lease_duration: = 86400
       plugins:
         openvswitch_agent:
           ovs:
-            bridge_mappings: bond0:br-ex
+           # bridge_mappin:wgs: bond0:br-ex
+            bridge_mappings: bond0:br-bond0
+          agent:
+            #tunnel_types: vxlan
+            #bridge_mappings: public:br-ex
+        #linuxbridge_agent:
+         # linux_bridge:
+          #  bridge_mappings: public:br-ex..
         sriov_agent:
           securitygroup:
             firewall_driver: neutron.agent.firewall.NoopFirewallDriver
