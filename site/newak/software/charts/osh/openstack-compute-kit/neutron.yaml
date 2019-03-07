@@ -38,7 +38,7 @@ data:
       plugins:
         openvswitch_agent:
           ovs:
-            bridge_mappings: br-ex:br-bond0
+            bridge_mappings: bond0:br-ex
         sriov_agent:
           securitygroup:
             firewall_driver: neutron.agent.firewall.NoopFirewallDriver
