@@ -397,6 +397,25 @@ data:
                   retry_max_interval: 30
                   retry_forever: false
             type_name: oslo_openstack_fluentd
+        - syslog_elasticsearch:
+            header: match
+            type: elasticsearch
+            user: "#{ENV['ELASTICSEARCH_USERNAME']}"
+            password: "#{ENV['ELASTICSEARCH_PASSWORD']}"
+            expression: "syslog.**"
+            include_tag_key: true
+            host: "#{ENV['ELASTICSEARCH_HOST']}"
+            port: "#{ENV['ELASTICSEARCH_PORT']}"
+            logstash_format: true
+            logstash_prefix: syslog
+            buffer_type: memory
+            buffer_chunk_limit: 10M
+            buffer_queue_limit: 512
+            flush_interval: "10"
+            max_retry_wait: 300
+            request_timeout: 60
+            disable_retry_limit: ""
+            type_name: syslog
         - elasticsearch:
             header: match
             type: elasticsearch
@@ -418,6 +437,13 @@ data:
                   retry_forever: false
             flush_interval: "10"
       parsers:
+        - docker:
+            header: parser
+            Name: docker
+            Format: json
+            Time_Key: time
+            Time_Format: "%Y-%m-%dT%H:%M:%S.%L"
+            Time_Keep: On
         - syslog:
             header: parser
             Name: syslog
