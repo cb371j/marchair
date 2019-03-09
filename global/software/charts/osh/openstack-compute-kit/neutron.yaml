@@ -184,6 +184,7 @@ metadata:
         path: .neutron.external_iface
       dest:
         path: .values.network.auto_bridge_add.br-ex
+        #path: .values.network.interface.external
         pattern: 'EXTERNAL_INTERFACE'
 
 data:
@@ -241,8 +242,9 @@ data:
     network:
       auto_bridge_add:
         br-ex: 'EXTERNAL_INTERFACE'
-      interface:
+      #interface:
         tunnel: 'TUNNEL_DEVICE'
+       # external: 'EXTERNAL_INTERFACE'
     conf:
       logging:
         loggers:
