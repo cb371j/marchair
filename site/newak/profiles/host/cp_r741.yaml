@@ -88,7 +88,7 @@ data:
               mountpoint: '/var'
               fstype: 'ext4'
               mount_options: 'defaults'
-      sdg:
+      sda:
         partitions:
           - name: 'nova'
             size: '99%'
