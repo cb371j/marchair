@@ -23,6 +23,7 @@ data:
           node_selector_key: sriov
           node_selector_value: enabled
     network:
+      auto_bridge_add: {br-ex: bond0} 
       backend:
         - openvswitch
         - sriov
@@ -39,6 +40,11 @@ data:
     conf:
       dhcp_lease_duration: = 86400
       plugins:
+        openvswitch_agent:
+          agent:
+            tunnel_types: vxlan
+          ovs:
+            bridge_mappings: physnet:br-ex
        # openvswitch_agent:
        #   ovs:
            # bridge_mappin:wgs: bond0:br-ex
@@ -54,7 +60,7 @@ data:
           securitygroup:
             firewall_driver: neutron.agent.firewall.NoopFirewallDriver
           sriov_nic:
-            exclude_devices: null
+            exclude_devices:
             physical_device_mappings: 'sriovnet1:enp135s0f0,sriovnet2:enp135s0f1'
         ml2_conf:
           ml2:
