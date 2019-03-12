@@ -1,0 +1,40 @@
+---
+schema: armada/Chart/v1
+metadata:
+  schema: metadata/Document/v1
+  name: nova
+  labels:
+    component: nova
+  layeringDefinition:
+    abstract: false
+    layer: site
+    parentSelector:
+      name: nova-global
+    actions:
+      - method: merge
+        path: .
+  storagePolicy: cleartext
+data:
+  values:
+    network:
+      backend:
+        - openvswitch
+        - sriov
+    conf:
+      nova:
+        #filter_scheduler:
+        #  enabled_filters: "RetryFilter, AvailabilityZoneFilter, RamFilter, ComputeFilter, ComputeCapabilitiesFilter, ImagePropertiesFilter, ServerGroupAntiAffinityFilter, ServerGroupAffinityFilter, PciPassthroughFilter, NUMATopologyFilter, DifferentHostFilter, SameHostFilter"
+        libvirt:
+          virt_type: kvm
+        DEFAULT:
+          vcpu_pin_set: "4-21,26-43,48-65,72-87"
+#          vif_plugging_is_fatal: False
+#          vif_plugging_timeout: 30
+        pci:
+#          alias: '{ "vendor_id":"10de", "product_id":"1bb3", "name":"P4", "device_type":"type-PCI" }'
+#          passthrough_whitelist: '{"vendor_id": "10de", "product_id": "1bb3"}'
+#        pci:
+          alias: '{"name": "numa0", "capability_type": "pci", "product_id": "158b", "vendor_id": "8086", "device_type": "type-PCI", "numa_policy": "required"}'
+          passthrough_whitelist: |
+            [{"address": "0000:86:02.0", "physical_network": "sriovnet1"},{"address": "0000:86:02.1", "physical_network": "sriovnet1"},{"address": "0000:86:03.2", "physical_network": "sriovnet1"},{"address": "0000:86:03.3", "physical_network": "sriovnet1"},{"address": "0000:86:03.4", "physical_network": "sriovnet1"},{"address": "0000:86:03.5", "physical_network": "sriovnet1"},{"address": "0000:86:03.6", "physical_network": "sriovnet1"},{"address": "0000:86:03.7", "physical_network": "sriovnet1"},{"address": "0000:86:04.0", "physical_network": "sriovnet1"},{"address": "0000:86:04.1", "physical_network": "sriovnet1"},{"address": "0000:86:04.2", "physical_network": "sriovnet1"},{"address": "0000:86:04.3", "physical_network": "sriovnet1"},{"address": "0000:86:02.2", "physical_network": "sriovnet1"},{"address": "0000:86:04.4", "physical_network": "sriovnet1"},{"address": "0000:86:04.5", "physical_network": "sriovnet1"},{"address": "0000:86:04.6", "physical_network": "sriovnet1"},{"address": "0000:86:04.7", "physical_network": "sriovnet1"},{"address": "0000:86:05.0", "physical_network": "sriovnet1"},{"address": "0000:86:05.1", "physical_network": "sriovnet1"},{"address": "0000:86:05.2", "physical_network": "sriovnet1"},{"address": "0000:86:05.3", "physical_network": "sriovnet1"},{"address": "0000:86:05.4", "physical_network": "sriovnet1"},{"address": "0000:86:05.5", "physical_network": "sriovnet1"},{"address": "0000:86:02.3", "physical_network": "sriovnet1"},{"address": "0000:86:05.6", "physical_network": "sriovnet1"},{"address": "0000:86:05.7", "physical_network": "sriovnet1"},{"address": "0000:86:02.4", "physical_network": "sriovnet1"},{"address": "0000:86:02.5", "physical_network": "sriovnet1"},{"address": "0000:86:02.6", "physical_network": "sriovnet1"},{"address": "0000:86:02.7", "physical_network": "sriovnet1"},{"address": "0000:86:03.0", "physical_network": "sriovnet1"},{"address": "0000:86:03.1", "physical_network": "sriovnet1"},{"address": "0000:86:0a.0", "physical_network": "sriovnet2"},{"address": "0000:86:0a.1", "physical_network": "sriovnet2"},{"address": "0000:86:0b.2", "physical_network": "sriovnet2"},{"address": "0000:86:0b.3", "physical_network": "sriovnet2"},{"address": "0000:86:0b.4", "physical_network": "sriovnet2"},{"address": "0000:86:0b.5", "physical_network": "sriovnet2"},{"address": "0000:86:0b.6", "physical_network": "sriovnet2"},{"address": "0000:86:0b.7", "physical_network": "sriovnet2"},{"address": "0000:86:0c.0", "physical_network": "sriovnet2"},{"address": "0000:86:0c.1", "physical_network": "sriovnet2"},{"address": "0000:86:0c.2", "physical_network": "sriovnet2"},{"address": "0000:86:0c.3", "physical_network": "sriovnet2"},{"address": "0000:86:0a.2", "physical_network": "sriovnet2"},{"address": "0000:86:0c.4", "physical_network": "sriovnet2"},{"address": "0000:86:0c.5", "physical_network": "sriovnet2"},{"address": "0000:86:0c.6", "physical_network": "sriovnet2"},{"address": "0000:86:0c.7", "physical_network": "sriovnet2"},{"address": "0000:86:0d.0", "physical_network": "sriovnet2"},{"address": "0000:86:0d.1", "physical_network": "sriovnet2"},{"address": "0000:86:0d.2", "physical_network": "sriovnet2"},{"address": "0000:86:0d.3", "physical_network": "sriovnet2"},{"address": "0000:86:0d.4", "physical_network": "sriovnet2"},{"address": "0000:86:0d.5", "physical_network": "sriovnet2"},{"address": "0000:86:0a.3", "physical_network": "sriovnet2"},{"address": "0000:86:0d.6", "physical_network": "sriovnet2"},{"address": "0000:86:0d.7", "physical_network": "sriovnet2"},{"address": "0000:86:0a.4", "physical_network": "sriovnet2"},{"address": "0000:86:0a.5", "physical_network": "sriovnet2"},{"address": "0000:86:0a.6", "physical_network": "sriovnet2"},{"address": "0000:86:0a.7", "physical_network": "sriovnet2"},{"address": "0000:86:0b.0", "physical_network": "sriovnet2"},{"address": "0000:86:0b.1", "physical_network": "sriovnet2"}]
+...
