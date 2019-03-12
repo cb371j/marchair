@@ -28,8 +28,7 @@ data:
         - openvswitch
         - sriov
       interface:
-        #tunnel: docker0
-        #tunnel_device: 'bond0.45'
+        tunnel_device: 'bond0.45'
         sriov:
           - device: enp135s0f0
             num_vfs: 32
@@ -44,23 +43,12 @@ data:
           agent:
             tunnel_types: vxlan
           ovs:
-            bridge_mappings: physnet:br-ex
-       # openvswitch_agent:
-       #   ovs:
-           # bridge_mappin:wgs: bond0:br-ex
-        #    bridge_mappings: bond0:br-bond0
-           # bridge_mappings: public:bond0
-          #agent:
-          #  tunnel_types: vxlan
-            #bridge_mappings: public:br-ex
-       # linuxbridge_agent:
-        #  linux_bridge:
-        #    bridge_mappings: public:bond0
+            bridge_mappings: bond0:br-ex
         sriov_agent:
           securitygroup:
             firewall_driver: neutron.agent.firewall.NoopFirewallDriver
           sriov_nic:
-            exclude_devices:
+            #exclude_devices:
             physical_device_mappings: 'sriovnet1:enp135s0f0,sriovnet2:enp135s0f1'
         ml2_conf:
           ml2:
