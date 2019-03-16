@@ -161,6 +161,8 @@ data:
       postgresql: enabled
       kube-ingress: enabled
       beta.kubernetes.io/fluentd-ds-ready: 'true'
+      openstack-libvirt: kernel
+      openstack-nova-compute: enabled
       node-exporter: enabled
       sriov: enabled
 ...
