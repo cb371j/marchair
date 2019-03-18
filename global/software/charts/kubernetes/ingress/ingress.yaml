@@ -43,6 +43,9 @@ data:
           labels:
             release_group: airship-ingress-kube-system
   values:
+    conf:
+      ingress:
+        proxy-body-size: 1000m
     labels:
       server:
         node_selector_key: kube-ingress
@@ -58,6 +61,7 @@ data:
       ingress:
         annotations:
           nginx.ingress.kubernetes.io/proxy-read-timeout: "603"
+          nginx.ingress.kubernetes.io/proxy-body-size: 1000m
     pod:
       replicas:
         error_page: 2
@@ -83,13 +87,5 @@ data:
   chart_name: ingress-kube-system-htk
   release: ingress-kube-system-htk
   namespace: ingress-kube-system-htk
-  values:
-    conf:
-      ingress:
-        proxy-body-size: 1000m
-    network:
-      ingress:
-        annotations:
-          nginx.ingress.kubernetes.io/proxy-body-size: 1000m
-          nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+  values: {}
   dependencies: []
