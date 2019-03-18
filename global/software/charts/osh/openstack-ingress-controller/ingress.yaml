@@ -42,17 +42,29 @@ data:
         - type: job
           labels:
             release_group: airship-openstack-ingress-controller
-  values:
-    labels:
-      server:
-        node_selector_key: openstack-control-plane
-        node_selector_value: enabled
-      error_server:
-        node_selector_key: openstack-control-plane
-        node_selector_value: enabled
-    pod:
-      replicas:
-        ingress: 2
-        error_page: 2
+values: 
+    conf: 
+      ingress: 
+        proxy-body-size: 1000m 
+    labels: 
+      server: 
+        node_selector_key: ucp-control-plane 
+        node_selector_value: enabled 
+      error_server: 
+        node_selector_key: ucp-control-plane 
+        node_selector_value: enabled 
+    pod: 
+      replicas: 
+        ingress: 1 
+        error_page: 1 
+    network: 
+      ingress: 
+        annotations: 
+          nginx.ingress.kubernetes.io/proxy-body-size: 1000m 
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    #pod:
+    #  replicas:
+    #    ingress: 2
+    #    error_page: 2
   dependencies:
     - osh-helm-toolkit
