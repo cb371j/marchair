@@ -42,7 +42,7 @@ data:
         - type: job
           labels:
             release_group: airship-openstack-ingress-controller
-values: 
+  values: 
     conf: 
       ingress: 
         proxy-body-size: 1000m 
