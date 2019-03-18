@@ -83,5 +83,13 @@ data:
   chart_name: ingress-kube-system-htk
   release: ingress-kube-system-htk
   namespace: ingress-kube-system-htk
-  values: {}
+  values:
+    conf:
+      ingress:
+        proxy-body-size: 1000m
+    network:
+      ingress:
+        annotations:
+          nginx.ingress.kubernetes.io/proxy-body-size: 1000m
+          nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
   dependencies: []
