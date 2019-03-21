@@ -33,5 +33,5 @@ data:
     conf:
       pool:
         target:
-          osd: 4
+          osd: 2
 ...

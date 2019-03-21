@@ -37,26 +37,14 @@ data:
         osd:
           - data:
               type: block-logical
-              location: /dev/sda
-            journal:
-              type: block-logical
-              location: /dev/sdg
-          - data:
-              type: block-logical
-              location: /dev/sdb
-            journal:
-              type: block-logical
-              location: /dev/sdg
-          - data:
-              type: block-logical
               location: /dev/sdc
             journal:
               type: block-logical
-              location: /dev/sdg
+              location: /dev/sda
           - data:
               type: block-logical
               location: /dev/sdd
             journal:
               type: block-logical
-              location: /dev/sdg
+              location: /dev/sda
 ...
