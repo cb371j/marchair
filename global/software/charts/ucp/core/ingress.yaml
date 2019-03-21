@@ -44,7 +44,7 @@ data:
   values:
     conf:
       ingress:
-        proxy-body-size: 1000m
+        proxy-body-size: 10000m
     labels:
       server:
         node_selector_key: ucp-control-plane
@@ -59,7 +59,7 @@ data:
     network:
       ingress:
         annotations:
-          nginx.ingress.kubernetes.io/proxy-body-size: 1000m
+          nginx.ingress.kubernetes.io/proxy-body-size: 10000m
           nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
   dependencies:
     - ucp-ingress-htk
