@@ -66,7 +66,7 @@ data:
 
   storage:
     physical_devices:
-      sdg:
+      sdi:
         labels:
           bootdrive: 'true'
         partitions:
@@ -88,7 +88,7 @@ data:
               mountpoint: '/var'
               fstype: 'ext4'
               mount_options: 'defaults'
-      sda:
+      sdh:
         partitions:
           - name: 'nova'
             size: '99%'
