@@ -45,7 +45,7 @@ data:
   values:
     conf:
       ingress:
-        proxy-body-size: 1000m
+        proxy-body-size: 10000m
     labels:
       server:
         node_selector_key: kube-ingress
@@ -61,7 +61,7 @@ data:
       ingress:
         annotations:
           nginx.ingress.kubernetes.io/proxy-read-timeout: "603"
-          nginx.ingress.kubernetes.io/proxy-body-size: 1000m
+          nginx.ingress.kubernetes.io/proxy-body-size: 10000m
     pod:
       replicas:
         error_page: 2
