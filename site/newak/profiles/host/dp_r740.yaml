@@ -118,3 +118,4 @@ data:
       sriov: enabled
       beta.kubernetes.io/fluentd-ds-ready: 'true'
 ...
+
